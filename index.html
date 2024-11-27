@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador - SENSIBILIDAD Y DIAMANTES</title>
+    <style>
+        /* General */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(180deg, #ffffff, #FFD700, #FF8C00);
+            color: #333;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #FF8C00;
+            text-shadow: 2px 2px #FFD700;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        /* Contenedor principal */
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Imagen circular */
+        .imagen-circular {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 20px auto;
+            border: 3px solid #FF8C00;
+            object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+        }
+
+        /* Links */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 15px 0;
+        }
+
+        ul li a {
+            display: block;
+            text-decoration: none;
+            color: #FF8C00;
+            background: #FFD700;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        ul li a:hover {
+            background: #FF4500;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Formulario */
+        .hidden {
+            display: none;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1em;
+            border: 2px solid #FF8C00;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 300px; /* Mismo ancho máximo que los botones de opciones */
+        }
+
+        input {
+            background: #FFF8DC;
+            color: #333;
+        }
+
+        button {
+            background: #FF0000;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #B22222;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado principal -->
+    <div class="container">
+        <h1>GENERADOR DE SENSIBILIDAD Y DIAMANTES</h1>
+        <p>¡Bienvenidos a Rayo YT! ⚡</p>
+        
+        <!-- Imagen circular debajo del texto -->
+        <img src="rayo.jpeg" alt="Imagen Rayo YT" class="imagen-circular">
+        
+        <p>
+            Nos alegra que estés aquí, formando parte de nuestra comunidad. Este espacio está diseñado especialmente para que descubras contenido único, te mantengas informado y disfrutes de lo mejor que tenemos para ofrecer.
+        </p>
+        <p>📌 Síguenos y no te pierdas ninguna novedad:</p>
+        <ul>
+            <li><a href="https://youtube.com/@rayo_yt-ff?si=rQ8loLbwSFoKobhE" target="_blank">YouTube</a></li>
+            <li><a href="https://www.instagram.com/rayo_yt_ff/profilecard/?igsh=YWQyNHJkcno4YnNq" target="_blank">Instagram</a></li>
+            <li><a href="https://www.tiktok.com/@rayo_ff_yt?_t=8rh76JqDHxo&_r=1" target="_blank">TikTok</a></li>
+            <li><a href="https://www.facebook.com/share/18GE94b9GT/?mibextid=LQQJ4d" target="_blank">Facebook</a></li>
+        </ul>
+    </div>
+
+    <!-- Opciones para configuraciones personalizadas -->
+    <div class="container">
+        <h2>Elige una opción para configurar:</h2>
+        <ul>
+            <li><a href="#" onclick="mostrarFormulario('disparo')">Botón de Disparo Todo Rojo 📲</a></li>
+            <li><a href="#" onclick="mostrarFormulario('sensibilidad')">Sensibilidad Todo Rojo 🔧</a></li>
+            <li><a href="#" onclick="mostrarFormulario('diamantes')">Diamantes Gratis 💎</a></li>
+        </ul>
+    </div>
+
+    <!-- Sección oculta para los formularios -->
+    <div class="container hidden" id="formulario">
+        <div id="contenidoFormulario"></div>
+        <p id="resultado" class="resultado"></p>
+    </div>
+
+    <script>
+        let tipoGenerador = '';
+
+        function mostrarFormulario(tipo) {
+            tipoGenerador = tipo;
+            document.getElementById('formulario').classList.remove('hidden');
+            let contenidoFormulario = '';
+
+            if (tipo === 'diamantes') {
+                contenidoFormulario = `
+                    <p>Introduce tu ID:</p>
+                    <input type="text" id="idUsuario" placeholder="Tu ID">
+                    <p>Diamantes:</p>
+                    <input type="number" id="cantidadDiamantes" placeholder="Ej: 1000">
+                    <button onclick="generarDiamantes()">Generar</button>
+                `;
+            } else {
+                contenidoFormulario = `
+                    <p>Dispositivo:</p>
+                    <input type="text" id="nombreDispositivo" placeholder="Ej: iPhone 14">
+                    <button onclick="generarResultado()">Generar</button>
+                `;
+            }
+
+            document.getElementById('contenidoFormulario').innerHTML = contenidoFormulario;
+        }
+
+        function generarResultado() {
+            const nombreDispositivo = document.getElementById('nombreDispositivo').value;
+
+            if (nombreDispositivo.trim() === '') {
+                alert('Por favor, introduce el nombre de tu dispositivo.');
+                return;
+            }
+
+            let resultado = '';
+            if (tipoGenerador === 'disparo') {
+                const numeroAleatorio = Math.floor(Math.random() * (55 - 45 + 1)) + 45;
+                resultado = `
+                    <p>¡Configuración generada para "${nombreDispositivo}"!</p>
+                    <p>El número de botón de disparo es: ${numeroAleatorio}</p>
+                `;
+            } else if (tipoGenerador === 'sensibilidad') {
+                const sensibilidades = {
+                    General: Math.floor(Math.random() * 21) + 180,
+                    "Mira de punto rojo": Math.floor(Math.random() * 21) + 180,
+                    "Mira x2": Math.floor(Math.random() * 21) + 180,
+                    "Mira x4": Math.floor(Math.random() * 21) + 180,
+                    "Mira francotirador": Math.floor(Math.random() * 21) + 180,
+                    "Cámara 360°": Math.floor(Math.random() * 21) + 180,
+                };
+
+                resultado = `<p>¡Sensibilidad para "${nombreDispositivo}"!</p>`;
+                for (const [clave, valor] of Object.entries(sensibilidades)) {
+                    resultado += `<p>${clave}: ${valor}</p>`;
+                }
+            }
+
+            document.getElementById('resultado').innerHTML = resultado;
+        }
+
+        function generarDiamantes() {
+            const idUsuario = document.getElementById('idUsuario').value;
+            const cantidadDiamantes = document.getElementById('cantidadDiamantes').value;
+
+            document.getElementById('resultado').innerHTML = `
+                <p>¡${cantidadDiamantes} diamantes generados para el ID: ${idUsuario}!</p>
+            `;
+        }
+    </script>
+</body>
+</html>
